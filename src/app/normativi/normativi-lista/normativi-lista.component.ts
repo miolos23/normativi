@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NormativDto } from 'src/app/interfaces/normativDto';
 import { NormativiService } from '../normativi.service';
@@ -15,7 +16,21 @@ export class NormativiListaComponent implements OnInit {
   errorMessage: string = '';
   displayedColumns: string[] = ['naziv', 'status'];
 
-  constructor(private service: NormativiService) { }
+  mainFilter: string='';
+
+  get normativiFiltered(){
+    return this.normativi.filter(n=>n.naziv.toLocaleLowerCase().indexOf(this.mainFilter.toLocaleLowerCase())>=0);
+
+  }
+
+
+  constructor(private service: NormativiService,
+              private route: Router) { }
+
+
+  goToEdit() {
+    //canActivate normativiEdit
+  }
 
   ngOnInit(): void {
     this.sub = this.service.getNormativList().subscribe({
@@ -24,6 +39,15 @@ export class NormativiListaComponent implements OnInit {
       },
       error: err => this.errorMessage = err
     });
+    // this.sub = this.service.getNormativList().subscribe(
+    //   (data)=>
+    //    {
+    //     this.normativi = data;
+    //     console.log(data);
+
+    //   },
+    //   err => this.errorMessage = err
+    // );
   }
 
   ngOnDestroy(): void {

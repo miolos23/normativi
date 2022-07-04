@@ -6,7 +6,13 @@
   </div>
   <div class='card-body'>
 
-    <table mat-table [dataSource]="normativi" class="mat-elevation-z8">
+    <app-normativi-toolbar
+      [readOnly]="false"
+      (filtered)="mainFilter=$event"
+      (addClicked)="goToEdit()"
+
+    ></app-normativi-toolbar>
+    <table mat-table [dataSource]="normativiFiltered" class="mat-elevation-z8">
 
       <ng-container matColumnDef="naziv">
         <th mat-header-cell *matHeaderCellDef> Naziv </th>
