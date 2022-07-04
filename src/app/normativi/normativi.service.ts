@@ -12,7 +12,7 @@ export class NormativiService {
   normativiData: NormativDto[] = [
     { id:1, naziv: 'Wellness pakovanje', status: 'U'},
     { id:2, naziv: 'Plazma pakovanje', status: 'U'},
-    { id:3, naziv: 'Josh pakovanje', status: 'U'},
+    { id:3, naziv: 'Josh pakovanje', status: 'U'}
   ];
 
   getNormativList(): Observable<NormativDto[]> {

@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { WellcomePageComponent } from './wellcome-page/wellcome-page.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { NormativiModule } from './normativi/normativi.module';
 import { SharedModule } from './shared/shared.module';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
@@ -14,7 +14,7 @@ import { AngularMaterialModule } from './angular-material/angular-material.modul
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    WellcomePageComponent
+    WelcomePageComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +22,7 @@ import { AngularMaterialModule } from './angular-material/angular-material.modul
     NormativiModule,
     SharedModule,
     AngularMaterialModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

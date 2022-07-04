@@ -1,1 +1,19 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+
+    <h1>NormativiAPP</h1>
+    <span class="menu-spacer"></span>
+    <div>
+      <a mat-button [routerLink]="'/welcome'"> Home </a>
+      <a mat-button [routerLink]="'/normativi'"> Normativi </a>
+      <a mat-button [routerLink]="'/admin'"> Admin </a>
+
+    </div>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row>
+    <span style="font-size: 12px;">Aplikacija za rad sa normativima</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
 <router-outlet></router-outlet>

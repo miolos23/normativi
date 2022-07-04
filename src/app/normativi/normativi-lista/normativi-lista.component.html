@@ -1,1 +1,48 @@
-<p>normativi-lista works!</p>
+
+
+<div class='card'>
+  <div class='card-header'>
+    {{pageTitle}}
+  </div>
+  <div class='card-body'>
+
+    <table mat-table [dataSource]="normativi" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="naziv">
+        <th mat-header-cell *matHeaderCellDef> Naziv </th>
+        <td mat-cell *matCellDef="let normativ"> {{normativ.naziv}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let normativ"> {{normativ.status}} </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <!-- <div class='table-responsive'>
+      <table class='table' *ngIf='normativi.length'>
+        <thead>
+          <tr>
+            <th>Normativ</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let normativ of normativi'>
+            <td>{{ normativ.naziv }}</td>
+            <td>{{ normativ.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+  </div>
+</div>
+
+
+
+
+

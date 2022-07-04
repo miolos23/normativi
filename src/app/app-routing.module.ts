@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { WellcomePageComponent } from './wellcome-page/wellcome-page.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 const routes: Routes = [
   {
-    path: '', component: WellcomePageComponent
+    path: 'welcome', component: WelcomePageComponent
+  },
+  {
+    path: '', component: WelcomePageComponent
   },
   {
     path: '**', component: PageNotFoundComponent
