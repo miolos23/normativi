@@ -10,6 +10,9 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'normativi', component: NormativiListaComponent
+  },
+  {
+    path: 'normativiEdit/:id', component: NormativiEditComponent
   }
 ];
 

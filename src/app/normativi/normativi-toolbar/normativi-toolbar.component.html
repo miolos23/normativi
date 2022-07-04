@@ -1,1 +1,5 @@
-<p>normativi-toolbar works!</p>
+<div class="flex flex-row main-container" style="display: flex">
+  <button mat-raised-button *ngIf="!readOnly" (click)="addClicked.emit()"><mat-icon>add</mat-icon></button>
+  <div class="h-divider" style="width:10px"></div>
+  <input mat-input type="text" [(ngModel)]="searchText" (keyup)="filterChanged()">
+</div>
