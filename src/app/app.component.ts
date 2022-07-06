@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'normativi';
+
+  dogadjaj: string='';
+  notifyWhenClickLighter(lighterObject:any){
+    this.dogadjaj=`Pritisnut je lighter ${lighterObject.source} status je ${lighterObject.state}`;
+  }
 }

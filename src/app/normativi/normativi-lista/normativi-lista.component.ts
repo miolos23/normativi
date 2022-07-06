@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NormativDto } from 'src/app/interfaces/normativDto';
 import { NormativiService } from '../normativi.service';
+// import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-normativi-lista',
@@ -14,7 +15,7 @@ export class NormativiListaComponent implements OnInit {
   sub!: Subscription;
   normativi: NormativDto[] = [];
   errorMessage: string = '';
-  displayedColumns: string[] = ['naziv', 'status'];
+  displayedColumns: string[] = ['naziv', 'status', 'akcije'];
 
   mainFilter: string='';
 
@@ -23,22 +24,19 @@ export class NormativiListaComponent implements OnInit {
 
   }
 
-
   constructor(private service: NormativiService,
-              private route: Router) { }
+              private router: Router) { }
 
+  // goBack(){
+  //   this.location.back();
+  // }
 
   goToEdit() {
-    //canActivate normativiEdit
+   this.router.navigate(['/normativiEdit',0]);
   }
 
   ngOnInit(): void {
-    this.sub = this.service.getNormativList().subscribe({
-      next: normativi => {
-        this.normativi = normativi;
-      },
-      error: err => this.errorMessage = err
-    });
+    this.refresh();
     // this.sub = this.service.getNormativList().subscribe(
     //   (data)=>
     //    {
@@ -50,7 +48,23 @@ export class NormativiListaComponent implements OnInit {
     // );
   }
 
+  refresh(){
+    this.sub = this.service.getNormativList().subscribe({
+      next: normativi => {
+        this.normativi = normativi;
+      },
+      error: err => this.errorMessage = err
+    });
+  }
+
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+  }
+
+  delete(item:NormativDto){
+    this.service.deleteNormativ(item.id)
+      .subscribe(()=>{
+        this.refresh();
+      });
   }
 }

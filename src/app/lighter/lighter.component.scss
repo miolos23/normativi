@@ -1,0 +1,19 @@
+.lighter {
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  border-radius: 50%;
+  background-color: rgb(220, 220, 220);
+  margin: 0 2px;
+  text-align: center;
+  font-family: verdana;
+  cursor: pointer;
+}
+
+.lighter.on {
+  background-color: yellow;
+}
+
+.lighter:hover {
+  outline: 2px solid green;
+}

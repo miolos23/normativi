@@ -40,7 +40,9 @@ export class NormativiService {
 
   deleteNormativ(id: number):Observable<boolean>{
     //this.normativiData=this.normativiData.filter(q=>q.id!=id);
-    this.normativiData=this.normativiData.splice(this.normativiData.findIndex(q=>q.id==id));
+    if(confirm("Da li ste sigurni da zelite da obrisete normativ?")) {
+      this.normativiData=this.normativiData.splice(this.normativiData.findIndex(q=>q.id==id));
+    }
     return of(true);
   }
 }

@@ -9,12 +9,14 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { NormativiModule } from './normativi/normativi.module';
 import { SharedModule } from './shared/shared.module';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
+import { LighterComponent } from './lighter/lighter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    LighterComponent
   ],
   imports: [
     BrowserModule,
