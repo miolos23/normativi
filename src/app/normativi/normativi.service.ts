@@ -35,14 +35,29 @@ export class NormativiService {
   }
 
   getNormativ(id:number):Observable<NormativDto>{
-    return of(this.normativiData.find(q=>q.id==id) as any);
+    if (id === 0) {
+      return of(this.initializeNormativ());
+    }
+    return of(this.normativiData.find(q => q.id == id) as any);
+  }
+
+  updateNormativ(normativ: NormativDto): Observable<NormativDto> | any {
+
   }
 
   deleteNormativ(id: number):Observable<boolean>{
     //this.normativiData=this.normativiData.filter(q=>q.id!=id);
     if(confirm("Da li ste sigurni da zelite da obrisete normativ?")) {
-      this.normativiData=this.normativiData.splice(this.normativiData.findIndex(q=>q.id==id));
+      this.normativiData=this.normativiData.splice(this.normativiData.findIndex(q => q.id == id));
     }
     return of(true);
+  }
+
+  private initializeNormativ(): NormativDto {
+    return {
+      id: 0,
+      naziv: '',
+      status: ''  
+    };
   }
 }

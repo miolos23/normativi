@@ -6,13 +6,14 @@ import { NormativiArtikalListaComponent } from './normativi-artikal-lista/normat
 import { NormativiToolbarComponent } from './normativi-toolbar/normativi-toolbar.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
+import { NormativiEditGuard } from './normativi-edit/normativi-edit.guard';
 
 const routes: Routes = [
   {
     path: 'normativi', component: NormativiListaComponent
   },
   {
-    path: 'normativiEdit/:id', component: NormativiEditComponent
+    path: 'normativiEdit/:id', canDeactivate: [NormativiEditGuard], component: NormativiEditComponent
   }
 ];
 

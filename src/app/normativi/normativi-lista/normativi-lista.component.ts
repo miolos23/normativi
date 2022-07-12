@@ -20,7 +20,7 @@ export class NormativiListaComponent implements OnInit {
   mainFilter: string='';
 
   get normativiFiltered(){
-    return this.normativi.filter(n=>n.naziv.toLocaleLowerCase().indexOf(this.mainFilter.toLocaleLowerCase())>=0);
+    return this.normativi.filter(n => n.naziv.toLocaleLowerCase().indexOf(this.mainFilter.toLocaleLowerCase()) >= 0);
 
   }
 

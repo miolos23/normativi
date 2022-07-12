@@ -1,1 +1,49 @@
-<p>normativi-edit works!</p>
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+
+  <div class="card-body">
+    <form novalidate (ngSubmit)="saveNormativ()" [formGroup]="normativForm">
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="normativNameId">Naziv</label>
+        <div class="col-md-8">
+          <input class="form-control" id="noramtivNameId" type="text" placeholder="Naziv (required)"
+            formControlName="normativNaziv" [ngClass]="{'is-invalid': '' }" />
+          <span class="invalid-feedback">
+            <!-- {{displayMessage.productName}} -->
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="statusId">Status</label>
+        <div class="col-md-8">
+          <input class="form-control" id="statusId" type="text" placeholder="Status"
+            formControlName="normativStatus" [ngClass]="{'is-invalid': '' }" />
+          <span class="invalid-feedback">
+            <!-- {{displayMessage.productCode}} -->
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <div class="offset-md-2 col-md-4">
+          <button class="btn btn-primary mr-3" style="width:80px;" type="submit"
+            [title]="normativForm.valid ? 'Sacuvaj promene' : 'Disabled until the form data is valid'"
+            [disabled]="!normativForm.valid">
+            Save
+          </button>
+          <button class="btn btn-outline-secondary mr-3" style="width:80px;" type="button" title="Cancel your edits"
+            [routerLink]="['/normativi']">
+            Cancel
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+
+</div>
