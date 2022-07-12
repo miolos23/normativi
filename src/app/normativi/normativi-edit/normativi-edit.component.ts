@@ -16,8 +16,8 @@ export class NormativiEditComponent implements OnInit, OnDestroy {
   normativForm : FormGroup;
   errorMessage: any;
 
-  normativ: NormativDto | undefined;
-  private sub: Subscription;
+
+  private sub: Subscription | undefined;
 
 
 
@@ -25,60 +25,64 @@ export class NormativiEditComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private router: Router,
               private normativiService: NormativiService) {
+
+              this.normativForm = this.fb.group({
+                  id: [0],
+                  naziv:['', [Validators.required, Validators.minLength(4)]],
+                  status: ['U']
+              });
+  }
+
+  get idControl(){
+    return this.normativForm.get('id');
+  }
+  get nazivControl(){
+    return this.normativForm.get('naziv');
+
+  }
+
+  get statusControl(){
+    return this.normativForm.get('status');
   }
 
   ngOnInit(): void {
-    this.normativForm = this.fb.group({
-      naziv:['', Validators.required],
-      status: 'U'
-    });
 
-    this.sub = this.route.paramMap.subscribe(
+    this.sub = this.route.params.subscribe(
       params => {
-        const id = +params.get('id');
-        this.getNormativ(id);
+        const id =  +params['id'];
+
+        if (id==0){
+          this.normativForm.reset();
+          this.pageTitle='Novi normativ';
+        }else{
+          this.normativiService.getNormativ(id)
+            .subscribe({
+              next: (normativ: NormativDto) => {
+                this.idControl?.setValue(normativ.id);
+                this.nazivControl?.setValue(normativ.naziv);
+                this.statusControl?.setValue(normativ.status);
+                this.pageTitle='Izmeni normativ';
+              },
+              error: err => this.errorMessage = err
+            });
+        }
+
+
       }
     );
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    this.sub?.unsubscribe();
   }
 
-
-  displayNormativ(normativ: NormativDto): void {
-    if (this.normativForm) {
-      this.normativForm.reset();
-    }
-    this.normativ = normativ;
-
-    if (this.normativ.id === 0) {
-      this.pageTitle = 'Dodaj Normativ';
-    } else {
-      this.pageTitle = `Izmeni Normativ: ${this.normativ.naziv}`;
-    }
-
-    this.normativForm.patchValue({
-      normativNaziv: this.normativ.naziv,
-      normativStatus: this.normativ.status
-    });
-  }
-
-  getNormativ(id: number): void {
-    this.normativiService.getNormativ(id)
-      .subscribe({
-        next: (normativ: NormativDto) => this.displayNormativ(normativ),
-        error: err => this.errorMessage = err
-      });
-  }
 
 
     saveNormativ(): void{
-      if (this.normativForm.valid) {
         if (this.normativForm.dirty) {
-          const p = { ...this.normativ, ...this.normativForm.value };
+          const p = { ...this.normativForm.value };
 
-          if (p.id === 0) {
+          if (+p.id === 0) {
             this.normativiService.addNormativ(p)
               .subscribe({
                 next: () => this.onSaveComplete(),
@@ -94,9 +98,6 @@ export class NormativiEditComponent implements OnInit, OnDestroy {
         } else {
           this.onSaveComplete();
         }
-      } else {
-        this.errorMessage = 'Unesite ispravne vrednosti.';
-      }
     }
 
     onSaveComplete(): void {

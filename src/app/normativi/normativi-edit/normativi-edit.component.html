@@ -10,18 +10,20 @@
         <label class="col-md-2 col-form-label" for="normativNameId">Naziv</label>
         <div class="col-md-8">
           <input class="form-control" id="noramtivNameId" type="text" placeholder="Naziv (required)"
-            formControlName="normativNaziv" [ngClass]="{'is-invalid': '' }" />
-          <span class="invalid-feedback">
+            formControlName="naziv" [ngClass]="{'is-invalid': '' }" />
+          </div>
+          <div class="text-danger" *ngIf="!nazivControl?.valid && nazivControl?.dirty">
             <!-- {{displayMessage.productName}} -->
-          </span>
-        </div>
+            Naziv nije validan
+
+          </div>
       </div>
 
       <div class="form-group row mb-2">
         <label class="col-md-2 col-form-label" for="statusId">Status</label>
         <div class="col-md-8">
           <input class="form-control" id="statusId" type="text" placeholder="Status"
-            formControlName="normativStatus" [ngClass]="{'is-invalid': '' }" />
+            formControlName="status" [ngClass]="{'is-invalid': '' }" />
           <span class="invalid-feedback">
             <!-- {{displayMessage.productCode}} -->
           </span>

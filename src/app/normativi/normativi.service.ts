@@ -30,6 +30,9 @@ export class NormativiService {
   }
 
   addNormativ(postData: NormativDto): Observable<boolean> {
+    const newId=Math.max(...this.normativiData.map(q=>q.id))+1;
+    //const newId=this.normativiData[this.normativiData.length-1]?.id+1;
+    postData.id=newId;
     this.normativiData.push(postData);
     return of(true);
   }
@@ -42,13 +45,16 @@ export class NormativiService {
   }
 
   updateNormativ(normativ: NormativDto): Observable<NormativDto> | any {
-
+    const targetNormativ=this.normativiData.find(q=>q.id==normativ.id) as any;
+    targetNormativ.naziv=normativ.naziv;
+    targetNormativ.status=normativ.status;
+    return of(true);
   }
 
   deleteNormativ(id: number):Observable<boolean>{
-    //this.normativiData=this.normativiData.filter(q=>q.id!=id);
     if(confirm("Da li ste sigurni da zelite da obrisete normativ?")) {
-      this.normativiData=this.normativiData.splice(this.normativiData.findIndex(q => q.id == id));
+      // this.normativiData=this.normativiData.splice(this.normativiData.findIndex(q => q.id == id));
+      this.normativiData=this.normativiData.filter(q=>q.id!=id);
     }
     return of(true);
   }
@@ -57,7 +63,7 @@ export class NormativiService {
     return {
       id: 0,
       naziv: '',
-      status: ''  
+      status: ''
     };
   }
 }
